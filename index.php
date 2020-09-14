@@ -12,7 +12,7 @@ if($json['type']==="url_verification"){
     // URL認証
     echo $json['challenge'];
     exit;
-}elseif($json['type']==="event_callback"){
+}else{
     // イベントコールバック
     if($json['event']['type']==="emoji_changed" && $json['event']['subtype']==="add"){
         // 絵文字追加orエイリアス追加
