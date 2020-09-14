@@ -14,7 +14,7 @@ if($json['type']==="url_verification"){
     exit;
 }else{
     // イベントコールバック
-    if($json['event']['type']==="emoji_changed" && $json['event']['subtype']==="add"){
+    if(strpos($json['event']['subtype'], 'add') !== false){
         // 絵文字追加orエイリアス追加
         if(strpos($json['event']['value'], 'alias:') === false){
             // 絵文字追加
@@ -24,11 +24,13 @@ if($json['type']==="url_verification"){
 
             // 送信コマンド実行
             exec("curl -X POST -H 'Content-type: application/json' --data '". $msg_json. " '". WEBHOOK_URL ."'");
+            exit;
         }else{
             // エイリアス追加
             $msg = "新しいエイリアスが追加されたよ！\n";
             $msg_json = json_encode(['text' => $msg]);
             exec("curl -X POST -H 'Content-type: application/json' --data '". $msg_json. " '". WEBHOOK_URL ."'");
+            exit;
         }
     }
 }
