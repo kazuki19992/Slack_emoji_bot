@@ -26,7 +26,9 @@ if($json['type']==="url_verification"){
             exec("curl -X POST -H 'Content-type: application/json' --data '". $msg_json. " '". WEBHOOK_URL ."'");
         }else{
             // エイリアス追加
-
+            $msg = "新しいエイリアスが追加されたよ！\n";
+            $msg_json = json_encode(['text' => $msg]);
+            exec("curl -X POST -H 'Content-type: application/json' --data '". $msg_json. " '". WEBHOOK_URL ."'");
         }
     }
 }
